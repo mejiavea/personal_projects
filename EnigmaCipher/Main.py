@@ -15,32 +15,24 @@ def revert(ciphertext):
 if __name__ == "__main__":
     print("Initializing machine...")
     machine = Machine()
-    old_positions = [machine.rotors[0].getPosition(), machine.rotors[1].getPosition(), machine.rotors[2].getPosition()]
     print("Machine initialized\n")
 
-    plugboard_settings = input("Enter pairs of letters in format abcd (or just hit enter) > ")
-    plaintext = input("enter plaintext (must be lowercase string with no spaces or special characters) > ")
+    rotors = input("Set machine rotors in format rotor_type;position, rotor_type;position, rotor_type;position > ")
+    rotors = rotors.split(", ")
+    for i in range(len(rotors)):
+        rotor_settings = rotors[i].split(";")
+        machine.rotors[i].setRotor(rotor_settings[0])
+        machine.rotors[i].setPosition(int(rotor_settings[1]))
 
-    print("Encrypting...")
+    plugboard_settings = input("\nEnter pairs of letters in format abcd (or just hit enter) > ")
+    plaintext = input("\nEnter plaintext (must be lowercase string with no spaces or special characters) > ")
+
+    print("\nEncrypting...")
     if plugboard_settings != "":
-        machine.plugboard.setWiring(plugboard_settings)
+        machine.plugboard.setWiring(convert(plugboard_settings))
     ciphertext = []
     plaintext = convert(plaintext)
     for n in plaintext:
         ciphertext.append(machine.encrypt(n))
     ciphertext = revert(ciphertext)
     print(f"Ciphertext: {ciphertext}\n")
-
-    for i in range(3):
-        machine.rotors[i].setPosition(old_positions[i])
-
-    plugboard_settings = input("enter more pluboard pairs (or enter) > ")
-    plaintext = input("enter another plaintext > ")
-    print(f"Encrypting...")
-    ciphertext = []
-    plaintext = convert(plaintext)
-    for n in plaintext:
-        ciphertext.append(machine.encrypt(n))
-    ciphertext = revert(ciphertext)
-    print(f"Ciphertext: {ciphertext}")
-

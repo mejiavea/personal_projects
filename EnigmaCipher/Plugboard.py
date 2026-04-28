@@ -31,3 +31,4 @@ class Plugboard:
 
     def swap(self, n):
         return self.__wiring[n]
+
