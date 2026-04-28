@@ -1,4 +1,4 @@
-alphabet = "abcdefghijklmnopqrstuvwxyz"
+alphabet = [i for i in range (0,26)]
 
 class Plugboard:
     def __init__(self):
@@ -26,6 +26,8 @@ class Plugboard:
 
     # resets plugboard to normal alphabetic mapping
     def resetWiring(self):
-        self.__wiring = {}
         for i in alphabet:
             self.__wiring[i] = i
+
+    def swap(self, n):
+        return self.__wiring[n]
