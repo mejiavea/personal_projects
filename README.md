@@ -1,2 +1,2 @@
-# personal_projects
-repo to store projects, used for remote work on desktop and laptop
+# Personal Projects
+Repository to store my personal projects
